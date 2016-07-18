@@ -33,7 +33,7 @@ ln -s dotfiles/vimrc .vimrc
 `curl https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim > ~/.vim/colors/molokai.vim`
 
 **MacVim 快捷键冲突映射：**
-系统偏好设置－》键盘－》快捷键－》应用快捷键－》添加，选择MacVim.app:
+系统偏好设置－》键盘－》快捷键－》应用快捷键－》添加，选择MacVim.app(brew安装，可以选择其他，然后`Command+Shift+G`，`/usr/local/Cellar/macvim/` 下面找到):
 
 - `Command + P` 菜单标题 `Print` 快捷键 `Alt+Command+P`
 - `Command + F` 菜单标题 `Find...` 快捷键 `Alt+Command+F`
