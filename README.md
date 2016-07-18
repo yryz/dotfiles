@@ -1,3 +1,5 @@
+![vim-go](https://github.com/yryz/dotfiles/raw/master/screenshots/vim-go.png)
+
 **安装 MacVim:**
 
 `brew install macvim --with-lua`
@@ -20,17 +22,15 @@ ln -s dotfiles/vimrc .vimrc
 `mvim ~/.vimrc` 执行 `:PluginInstall`
 
 
-**安装字体:**
+**安装字体：**
 
 [Source Code Pro](https://github.com/adobe-fonts/source-code-pro)
 
-**配置皮肤:**
+**配置皮肤：**
 [Molokai color scheme for Vim](https://github.com/tomasr/molokai)
 
 `mkdir -p ~/.vim/colors`
-
-`curl https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim > ~/.vim/colors/molokai.vim
-`
+`curl https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim > ~/.vim/colors/molokai.vim`
 
 **MacVim 快捷键冲突映射：**
 系统偏好设置－》键盘－》快捷键－》应用快捷键－》添加，选择MacVim.app:
@@ -43,9 +43,9 @@ ln -s dotfiles/vimrc .vimrc
 **ctrsf.vim插件依赖：** 
 `brew install ack`
 
-**tagbar插件依赖:** 
+**tagbar插件依赖：** 
 `brew install ctags`
 
-**vim-go插件依赖:**
+**vim-go插件依赖：**
 vim中执行 `:GoInstallBinaries` （自己准备好梯子）
 
