@@ -30,7 +30,7 @@ Plugin 'gregsexton/gitv'
 Plugin 'vim-scripts/matchit.zip'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/git-nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'scrooloose/syntastic'
 Plugin 'majutsushi/tagbar'
@@ -178,7 +178,7 @@ if has("gui_macvim")
 	map <D-e> :NERDTreeTabsToggle<CR>
 	map <leader>e :NERDTreeFind<CR><CR>
 	"Open sidebar with cmd+k
-	map <D-k> :NERDTreeTabsToggle<CR>
+	" map <D-k> :NERDTreeTabsToggle<CR>
 	" Window switch map {{{
 	map <D-j> <C-W>j
 	map <D-k> <C-W>k
