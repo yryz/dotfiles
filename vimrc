@@ -168,8 +168,8 @@ if has("gui_macvim")
         imap <D-r> <esc>:MyCtrlPTag<cr>
 	nmap <D-R> :CtrlPBufTagAll<cr>
 	imap <D-R> <esc>:CtrlPBufTagAll<cr>
-	nmap <D-w> :bd<cr>
-	imap <D-w> <esc>:bd<cr>
+	nmap <D-w> :NERDTreeTabsToggle<CR>:bd<CR>:NERDTreeTabsToggle<cr><C-W><C-W>
+	imap <D-w> <esc>:NERDTreeTabsToggle<CR>:bd<CR>:NERDTreeTabsToggle<cr><C-W><C-W>
 	map <D-/> :TComment<cr>
 	vmap <D-/> :TComment<cr>gv
 	nmap <D-f> :CtrlSF <C-R>=expand("<cword>")<CR>
