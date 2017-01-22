@@ -91,6 +91,7 @@ set cursorline
 set switchbuf=usetab,usetab     " open new buffers always in new tabs
 set formatoptions+=tcroqw
 autocmd FileType go :set noexpandtab
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 let g:ackhighlight=1
 let g:TagmaBufMgrLastLine = 1
 let g:NERDTreeDirArrows = 0
@@ -538,6 +539,7 @@ au BufWritePost *.go GoImports
 nmap <Leader>gt :GoTest<CR>
 nmap <Leader>gi :GoInstall<CR>
 nmap <Leader>gr :GoRename<CR>
+nmap <Leader>ge :GoReferrers<CR>
 nmap <Leader>gl :Gpull<CR>
 nmap <Leader>gp :Gpush<CR>
 nmap <Leader>cc :Gstatus<CR>
