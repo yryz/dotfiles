@@ -561,3 +561,9 @@ hi Cursor guibg=#FF0000
 let g:ctrlsf_winsize = '30%'
 
 autocmd BufNewFile,BufRead *.define setf define
+
+"youdao dict
+vnoremap <silent> <C-T> :<C-u>Ydv<CR>
+nnoremap <silent> <C-T> :<C-u>Ydc<CR>
+noremap <leader>yd :<C-u>Yde<CR> 
+
