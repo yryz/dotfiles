@@ -50,6 +50,7 @@ Plugin 'zaki/zazen'
 Plugin 'noahfrederick/vim-hemisu'
 
 Plugin 'ianva/vim-youdao-translater'
+Plugin 'AndrewRadev/splitjoin.vim'
 
 
 call vundle#end()            " required
