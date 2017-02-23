@@ -93,6 +93,7 @@ set switchbuf=usetab,usetab     " open new buffers always in new tabs
 set formatoptions+=tcroqw
 autocmd FileType go :set noexpandtab
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType json :set cole=0
 let g:ackhighlight=1
 let g:TagmaBufMgrLastLine = 1
 let g:NERDTreeDirArrows = 0
@@ -123,7 +124,7 @@ nmap <D-6> 6gt
 nmap <D-7> 7gt
 nmap <D-8> 8gt
 nmap <D-9> 9gt
-inoremap <ESC> <ESC>:set iminsert=0<CR>
+inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
 nmap <expr> <C-J> &diff ? ']c' : '<C-J>'
 nmap <expr> <C-K> &diff ? '[c' : '<C-K>'
 
@@ -170,8 +171,9 @@ if has("gui_macvim")
         imap <D-r> <esc>:MyCtrlPTag<cr>
 	nmap <D-R> :CtrlPBufTagAll<cr>
 	imap <D-R> <esc>:CtrlPBufTagAll<cr>
-	nmap <D-w> :NERDTreeTabsToggle<CR>:bd<CR>:NERDTreeTabsToggle<cr><C-W><C-W>
-	imap <D-w> <esc>:NERDTreeTabsToggle<CR>:bd<CR>:NERDTreeTabsToggle<cr><C-W><C-W>
+    " 关闭缓冲区，不退出窗口(对未保存的有点小问题)
+	nmap <D-w> :bp<bar>sp<bar>bn<bar>bd<CR>
+	imap <D-w> <esc>:bp<bar>sp<bar>bn<bar>bd<CR>
 	map <D-/> :TComment<cr>
 	vmap <D-/> :TComment<cr>gv
 	nmap <D-f> :CtrlSF <C-R>=expand("<cword>")<CR>
@@ -477,6 +479,7 @@ let g:go_highlight_structs = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_build_constraints = 1
+let g:go_highlight_types = 1
 
 function! OnGolangCompleteDone()
 	if !exists('v:completed_item') || empty(v:completed_item)
@@ -546,6 +549,23 @@ nmap <Leader>gp :Gpush<CR>
 nmap <Leader>cc :Gstatus<CR>
 nmap <Leader>gs :Gstatus<CR>
 
+au FileType go nmap <Leader>ds <Plug>(go-def-split)
+au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+autocmd FileType go nmap <Leader>i <Plug>(go-info)
+
+" run :GoBuild or :GoTestCompile based on the go file
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#cmd#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+
+autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+
 set fileencodings=utf-bom,utf-8,gbk,gb2312,gb18030,cp936,latin1
 hi Pmenu      guifg=#F6F3E8 guibg=#444444
 " hi PmenuSel   guifg=#FFFFFF guibg=#0077DD
@@ -564,7 +584,7 @@ let g:ctrlsf_winsize = '30%'
 autocmd BufNewFile,BufRead *.define setf define
 
 "youdao dict
-vnoremap <silent> <C-T> :<C-u>Ydv<CR>
-nnoremap <silent> <C-T> :<C-u>Ydc<CR>
+vnoremap <silent> <Leader>y :<C-u>Ydv<CR>
+nnoremap <silent> <Leader>y :<C-u>Ydc<CR>
 noremap <leader>yd :<C-u>Yde<CR> 
 
