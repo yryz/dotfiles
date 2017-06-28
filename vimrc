@@ -12,10 +12,10 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'SirVer/ultisnips'
-Plugin 'Shougo/neocomplete.vim'
+" Plugin 'Shougo/neocomplete.vim'
 " Plugin 'Shougo/deoplete.nvim'
 " Plugin 'drmingdrmer/xptemplate'
-" Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 " Plugin 'Shougo/neosnippet.vim'
 " Plugin 'Shougo/neosnippet-snippets'
 
@@ -361,10 +361,12 @@ let g:syntastic_warning_symbol = "⚠"
 let g:syntastic_mode_map = { "mode": "passive",
 			\ "active_filetypes": ["ruby", "php", "go" ],
 			\ "passive_filetypes": ["shell" ] }
+let g:syntastic_go_checkers = ['govet', 'errcheck']
 
-command! GS lcd ~/work/globalGoPath/src/code.ccplaying.com/d1/gs
-command! LS lcd ~/work/globalGoPath/src/code.ccplaying.com/d1/gw
 command! CO CtrlSFOpen
+
+" 不搜索Go、nodejs的库目录
+let g:ctrlsf_ignore_dir = ["node_modules", "vendor"]
 
 " Remember last location{{{
 autocmd BufReadPost *

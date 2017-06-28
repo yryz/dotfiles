@@ -5,7 +5,7 @@
 	`brew install macvim --with-lua`
 	
 	PS:
-	
+	
 	>* neocomplete 插件需要`lua`支持
 	>* brew 安装macvim需要全功能Xcode，只安装了`Xcode Command Line Tools` 不行，AppStore 下载慢，可以找同事AirDrop共享 `Xcode.app`
 
