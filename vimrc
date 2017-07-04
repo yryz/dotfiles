@@ -98,7 +98,6 @@ let g:ackhighlight=1
 let g:TagmaBufMgrLastLine = 1
 let g:NERDTreeDirArrows = 0
 let g:nerdtree_tabs_open_on_gui_startup = 0
-set fileencodings=utf-8,ucs-bom,gb18030,default
 "}}}
 " Colorscheme {{{
 " let macvim_skip_colorscheme=1
@@ -178,7 +177,7 @@ if has("gui_macvim")
 	vmap <D-/> :TComment<cr>gv
 	nmap <D-f> :CtrlSF <C-R>=expand("<cword>")<CR>
 	imap <D-f> <ESC>:CtrlSF <C-R>=expand("<cword>")<CR>
-	vnoremap <D-f>  y :CtrlSF"<C-R>=escape(@", '\\/.*$^~[]()"')<CR>"
+	vnoremap <D-f>  y :CtrlSF"<C-R>=escape(@", '"')<CR>"
 	map <D-e> :NERDTreeTabsToggle<CR>
 	map <leader>e :NERDTreeFind<CR><CR>
 	"Open sidebar with cmd+k
