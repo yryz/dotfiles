@@ -12,6 +12,7 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 " Plugin 'Shougo/neocomplete.vim'
 " Plugin 'Shougo/deoplete.nvim'
 " Plugin 'drmingdrmer/xptemplate'
@@ -43,6 +44,7 @@ Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-lua-ftplugin'
 Plugin 'raymond-w-ko/vim-lua-indent'
 Plugin 'fatih/vim-go'
+Plugin 'godoctor/godoctor.vim'
 
 Plugin 'bling/vim-airline'
 Plugin 'tomasr/molokai'
@@ -178,6 +180,7 @@ if has("gui_macvim")
 	nmap <D-f> :CtrlSF <C-R>=expand("<cword>")<CR>
 	imap <D-f> <ESC>:CtrlSF <C-R>=expand("<cword>")<CR>
 	vnoremap <D-f>  y :CtrlSF"<C-R>=escape(@", '"')<CR>"
+	vnoremap <D-S-f>  y :a
 	map <D-e> :NERDTreeTabsToggle<CR>
 	map <leader>e :NERDTreeFind<CR><CR>
 	"Open sidebar with cmd+k
@@ -260,9 +263,10 @@ let g:lua_complete_omni = 1
 let g:lua_complete_dynamic = 0
 let g:neocomplete#sources.lua = [ "buffer", "dictionary", "member", "tag", "omni", "ultisnips"]
 
-let g:UltiSnipsJumpForwardTrigger="<TAB>"
-let g:UltiSnipsJumpBackwardTrigger="<S-TAB>"
-let g:UltiSnipsExpandTrigger="<nop>"
+" 解决与 YCM 插件的冲突
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:ulti_expand_or_jump_res = 0
 function! <SID>ExpandSnippetOrReturn()
 	" let snippet = UltiSnips#ExpandSnippetOrJump()
