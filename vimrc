@@ -11,32 +11,35 @@ call vundle#begin()
 " call vundle#begin('~/some/path/here')
 
 Plugin 'VundleVim/Vundle.vim'
+" 引擎
 Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+" 代码块集合
+Plugin 'honza/vim-snippets' 
 " Plugin 'Shougo/neocomplete.vim'
 " Plugin 'Shougo/deoplete.nvim'
 " Plugin 'drmingdrmer/xptemplate'
+Plugin 'ervandew/supertab'
 Plugin 'Valloric/YouCompleteMe'
 " Plugin 'Shougo/neosnippet.vim'
 " Plugin 'Shougo/neosnippet-snippets'
 
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'dyng/ctrlsf.vim'
 Plugin 'rking/ag.vim'
 Plugin 'Raimondi/delimitMate'
+Plugin 'terryma/vim-multiple-cursors' "回车选中相同单词，类似Sublime Command+D
+
+Plugin 'chrisbra/csv.vim'
 
 Plugin 'gregsexton/gitv'
 Plugin 'vim-scripts/matchit.zip'
 Plugin 'tomtom/tcomment_vim'
-Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'scrooloose/syntastic'
 Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-surround'
-Plugin 'airblade/vim-gitgutter'
 
 Plugin 'klen/python-mode'
 Plugin 'davidhalter/jedi-vim'
@@ -46,10 +49,21 @@ Plugin 'raymond-w-ko/vim-lua-indent'
 Plugin 'fatih/vim-go'
 Plugin 'godoctor/godoctor.vim'
 
-Plugin 'bling/vim-airline'
-Plugin 'tomasr/molokai'
+" Git
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+
+" UI
+Plugin 'scrooloose/nerdtree'
+"Plugin 'ryanoasis/vim-devicons'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'zaki/zazen'
 Plugin 'noahfrederick/vim-hemisu'
+
+" Themes
+" Plugin 'lifepillar/vim-solarized8'
+Plugin 'tomasr/molokai'
 
 Plugin 'ianva/vim-youdao-translater'
 Plugin 'AndrewRadev/splitjoin.vim'
@@ -143,16 +157,18 @@ vmap ) S)
 "}}}
 
 set guioptions=''
-map <C-j> <C-W>j
+" map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-l> <C-W>l
 map <C-h> <C-W>h
 set guifont=Source\ Code\ Pro\ Light:h14
 set background=dark
 colorscheme molokai
+" colorscheme solarized8_dark
 set fillchars=vert:\ 
 " set guifontwide=方正启体简体
 "set guifontwide=FZQiTi-S14S
+let g:airline_powerline_fonts = 1
 set clipboard+=unnamed
 set numberwidth=4
 func! MyCtrlPTag()
@@ -202,85 +218,6 @@ if has("gui_macvim")
 endif
 
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/cscope*,*/*.csv/,*/*.log,*tags*,*/bin/*        " Linux/MacOSX
-
-
-
-" Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-" Disable AutoComplPop.
-" let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#auto_completion_start_length = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 1
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-let g:neocomplete#max_keyword_width = 200
-
-
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" <C-h>, <BS>: close popup and delete backword char.
-" inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-" inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-
-" AutoComplPop like behavior.
-set completeopt="menu,preview,longest"
-let g:neocomplete#enable_auto_select = 1
-
-" Enable omni completion.
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-" autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-
-if !exists('g:neocomplete#sources')
-	let g:neocomplete#sources = {}
-endif
-let g:neocomplete#sources.go = [ "buffer", "omni", "ultisnips"]
-
-let g:lua_check_syntax = 0
-let g:lua_complete_omni = 1
-let g:lua_complete_dynamic = 0
-let g:neocomplete#sources.lua = [ "buffer", "dictionary", "member", "tag", "omni", "ultisnips"]
-
-" 解决与 YCM 插件的冲突
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-let g:ulti_expand_or_jump_res = 0
-function! <SID>ExpandSnippetOrReturn()
-	" let snippet = UltiSnips#ExpandSnippetOrJump()
-	let snippet = UltiSnips#ExpandSnippet()
-	if g:ulti_expand_or_jump_res > 0
-		return snippet
-	else
-		return ""
-	endif
-endfunction
-imap <expr> <CR> pumvisible() ?
-    \ neocomplete#mappings#close_popup() . "<C-R>=<SID>ExpandSnippetOrReturn()<CR>":
-    \ "<Plug>delimitMateCR"
-
 
 if has('conceal')
   set conceallevel=2 concealcursor=niv
@@ -458,25 +395,70 @@ let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#tab_nr_type = 2 " splits and tab number
 let g:airline#extensions#bufferline#enabled = 1
 
+" YouCompleteMe {{{
+  " preview window settiing
+  let g:ycm_add_preview_to_completeopt = 1
+  let g:ycm_autoclose_preview_window_after_completion = 0
+  let g:ycm_autoclose_preview_window_after_insertion = 1
 
-function! Neoj()
-    if pumvisible() == 1
-        return "\<C-n>"
-    else
-	return "\<C-j>"
-    endif
-endfunction
+  " typing 2 chars
+  let g:ycm_min_num_of_chars_for_completion = 2
+  " Completion when typing inside comments
+  let g:ycm_complete_in_comments = 1  
+  " Query the UltiSnips plugin
+  let g:ycm_use_ultisnips_completer = 1 
+  " Collect identifiers from strings and comments and tag fiels
+  let g:ycm_collect_identifiers_from_comments_and_strings = 1   
+  let g:ycm_collect_identifiers_from_tags_files = 1
 
-function! Neok()
-    if pumvisible() == 1
-        return "\<C-p>"
-    else
-        return "\<C-k>"
-    endif
-endfunction
+  " some symbols
+  let g:ycm_error_symbol = '>>'
+  let g:ycm_warning_symbol = '>*'
 
-inoremap <silent> <C-j> <C-R>=Neoj()<CR>
-inoremap <silent> <C-k> <C-R>=Neok()<CR>
+  " Specifies Python interpreter to run jedi
+  let g:ycm_python_binary_path = 'python3'
+
+  " " Seed its identifier database
+  " let g:ycm_seed_identifiers_with_syntax=1
+  
+  " youcompleteme select keys
+  let g:ycm_key_list_select_completion = ['<Down>']
+  let g:ycm_key_list_previous_completion = ['<Up>']
+
+  " Where GoTo* commands result should be opened, same-buffer
+  let g:ycm_goto_buffer_command = 'horizontal-split'
+  " nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
+  nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+  nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
+
+  let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
+  " blacklist
+  let g:ycm_filetype_blacklist = {
+      \ 'gitcommit' : 1,
+      \ 'tagbar' : 1,
+      \ 'qf' : 1,
+      \ 'notes' : 1,
+      \ 'markdown' : 1,
+      \ 'unite' : 1,
+      \ 'text' : 1,
+      \ 'vimwiki' : 1,
+      \ 'pandoc' : 1,
+      \ 'infolog' : 1,
+      \ 'mail' : 1
+      \}
+
+" }}}
+
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 let g:go_highlight_operators = 1
 let g:go_highlight_methods = 1
@@ -485,6 +467,8 @@ let g:go_highlight_build_constraints = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_types = 1
+"let g:go_def_mode = 'guru'
+let g:go_def_mode = 'godef'
 
 function! OnGolangCompleteDone()
 	if !exists('v:completed_item') || empty(v:completed_item)
